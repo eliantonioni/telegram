@@ -1,0 +1,33 @@
+management:
+  tracing:
+    enabled: true
+    sampling.probability: 1.0
+#  zipkin.tracing.endpoint: http://localhost:9411/api/v2/spans
+
+logging:
+  pattern.level: "[trace_id=%mdc{traceId} span_id=%mdc{spanId}] %p"
+#  level:
+#    org.springframework.core.io.support: DEBUG
+#    org.springframework.context.annotation: DEBUG
+
+spring:
+  application:
+    name: '@project.artifactId@'
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/aeliseev?currentSchema=telegram
+    username: user
+    password: pass
+  jpa:
+    properties:
+      hibernate:
+        jdbc.time_zone: UTC
+
+server:
+  port: 8080
+
+telegrambots:
+  enabled: true
+  tokens:
+    ae.echo: ${ae_echo_bot_token}
+    ae.photo: ${ae_photo_bot_token}
